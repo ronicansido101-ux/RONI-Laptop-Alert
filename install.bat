@@ -7,15 +7,15 @@ if not exist "config.bat" (
  exit /b 1
 )
 call config.bat
-if "%BOT_TOKEN%"=="" goto bad
-if "%CHAT_ID%"=="" goto bad
-if "%BOT_TOKEN%"=="PASTE_YOUR_BOT_TOKEN_HERE" goto bad
-if "%CHAT_ID%"=="PASTE_YOUR_CHAT_ID_HERE" goto bad
+if "%BOT_TOKEN%"==\"\" goto bad
+if "%CHAT_ID%"==\"\" goto bad
+if "%BOT_TOKEN%"==\"PASTE_YOUR_BOT_TOKEN_HERE\" goto bad
+if "%CHAT_ID%"==\"PASTE_YOUR_CHAT_ID_HERE\" goto bad
 
-schtasks /Create /TN "RONI Laptop Alert - Login" /TR "\"%~dp0send_login.bat\"" /SC ONLOGON /F >nul
+schtasks /Create /TN \"RONI Laptop Alert - Login\" /TR \"\"%~dp0send_login.bat\"\" /SC ONLOGON /F >nul
 if errorlevel 1 goto fail
 
-schtasks /Create /TN "RONI Laptop Alert - Shutdown" /TR "\"%~dp0send_shutdown.bat\"" /SC ONEVENT /EC System /MO "*[System[(EventID=1074)]]" /F >nul
+schtasks /Create /TN \"RONI Laptop Alert - Shutdown\" /TR \"\"%~dp0send_shutdown.bat\"\" /SC ONEVENT /EC System /MO \"*[System[(EventID=1074)]]\" /F >nul
 if errorlevel 1 goto fail
 
 echo Installation complete.
